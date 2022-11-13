@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAEI,aAFS,CACX,MAAM,CACJ,QAAQ,CAAC;EACP,MAAM,EAAE,aAAa;CACtB;;AAJL,AAKI,aALS,CACX,MAAM,CAIJ,KAAK,CAAC;EACJ,MAAM,EAAE,aAAa;CAItB;;AAVL,AAOM,aAPO,CACX,MAAM,CAIJ,KAAK,AAEF,MAAM,CAAC;EACN,MAAM,EAAE,IAAI;CACb;;AAIP,AAAA,WAAW,CAAC;EACV,KAAK,EAAE,GAAG;CACX;;AACD,AAAA,kBAAkB,CAAC;EACjB,MAAM,EAAE,aAAa;EACrB,OAAO,EAAE,GAAG;EACZ,KAAK,EAAE,GAAG;CACX",
+    "sources": [
+        "forms-control.module.scss"
+    ],
+    "names": [],
+    "file": "forms-control.module.css"
+}

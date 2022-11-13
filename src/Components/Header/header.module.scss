@@ -1,0 +1,21 @@
+.header {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blue;
+}
+.wrapper {
+  width: 1170px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.image {
+  width: 80px;
+  height: 80px;
+}
+.login-block {
+  color: white;
+}

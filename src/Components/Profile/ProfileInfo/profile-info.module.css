@@ -1,0 +1,33 @@
+.header-img {
+  height: 100px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.ava-img {
+  width: 100px;
+  height: 100px;
+}
+
+.info {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.description {
+  margin-left: 20px;
+}
+
+.info-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/*# sourceMappingURL=profile-info.module.css.map */
