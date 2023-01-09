@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ContactType, ProfileType } from "../../../types/types";
 
 interface IProfileDataFormProps {
+  profile: ProfileType;
   saveProfileCallback: (values: ProfileType) => void;
 }
 
@@ -17,8 +18,14 @@ interface FormValues {
 }
 
 const ProfileDataForm: React.FC<IProfileDataFormProps> = (props) => {
-  const { saveProfileCallback } = props;
+  const { saveProfileCallback, profile } = props;
   const { register, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      fullName: profile?.fullName,
+      aboutMe: profile?.aboutMe,
+      lookingForAJob: profile?.lookingForAJob,
+      lookingForAJobDescription: profile?.lookingForAJobDescription,
+    },
     mode: "onChange",
   });
 

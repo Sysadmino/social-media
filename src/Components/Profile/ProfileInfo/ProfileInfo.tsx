@@ -52,7 +52,7 @@ const ProfileInfo: React.FC<IProfileInfoProps> = (props) => {
           {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
           <br />
           {editMode ? (
-            <ProfileDataForm saveProfileCallback={onSubmit} />
+            <ProfileDataForm saveProfileCallback={onSubmit} profile={profile} />
           ) : (
             <ProfileData
               profile={profile}
