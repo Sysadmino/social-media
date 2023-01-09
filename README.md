@@ -6,7 +6,8 @@ Social Media App is a big project with many different options. it has complete a
 
 There is a test account for this. 
 
-### `yarn start`
+### `Email: free@samuraijs.com`
+### `Password: free`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
