@@ -2,9 +2,9 @@
 
 Social Media App is a big project with many different options. it has complete authorization, pagination, search and filter users, possibility to edit user data, follow/unfollow.
 
-## Available Scripts
+## How to test this app?
 
-In the project directory, you can run:
+There is a test account for this. 
 
 ### `yarn start`
 
