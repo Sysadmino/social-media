@@ -7,12 +7,20 @@ const SiteBar = () => {
     <nav className={styles.sitebar}>
       <ul>
         <li activeClassName={styles["active-item"]}>
-          <NavLink className={styles.item} to="/profile">
+          <NavLink
+            className={styles.item}
+            activeClassName={styles.active}
+            to="/profile"
+          >
             Profile
           </NavLink>
         </li>
         <li activeClassName={styles["active-item"]}>
-          <NavLink className={styles.item} to="/users">
+          <NavLink
+            className={styles.item}
+            activeClassName={styles.active}
+            to="/users"
+          >
             Users
           </NavLink>
         </li>
