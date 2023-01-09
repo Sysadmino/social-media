@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Social Media App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Social Media App is a big project with many different options. it has complete authorization, pagination, search and filter users, possibility to edit user data, follow/unfollow.
 
 ## Available Scripts
 
