@@ -1,3 +1,4 @@
+import { errorActions } from "../../Utils/EnqueueSnackbar";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { usersAPI } from "../../api/api";
 import {
@@ -21,19 +22,25 @@ interface IRequestedUsers {
 }
 
 export function* requestedUsers(action: IRequestedUsers) {
-  yield put(actions.toggleIsFetching(true));
-  yield put(actions.setCurrentPage(action.pageNumber));
-  yield put(actions.setFilter(action.term, action.friend));
-  let data = yield call(
-    usersAPI.getUsers,
-    action.pageNumber,
-    action.pageSize,
-    action.term,
-    action.friend
-  );
-  yield put(actions.toggleIsFetching(false));
-  yield put(actions.setUsers(data.items));
-  yield put(actions.setTotalCount(data.totalCount));
+  try {
+    yield put(actions.toggleIsFetching(true));
+    yield put(actions.setCurrentPage(action.pageNumber));
+    yield put(actions.setFilter(action.term, action.friend));
+    let data = yield call(
+      usersAPI.getUsers,
+      action.pageNumber,
+      action.pageSize,
+      action.term,
+      action.friend
+    );
+    yield put(actions.setUsers(data.items));
+    yield put(actions.setTotalCount(data.totalCount));
+    yield put(actions.toggleIsFetching(false));
+  } catch {
+    yield put(
+      errorActions.getSnackbarPopup("Не удалось загрузить пользователей")
+    );
+  }
 }
 
 interface IFollowRequest {
@@ -41,9 +48,15 @@ interface IFollowRequest {
 }
 
 export function* followRequest(action: IFollowRequest) {
-  let response = yield call(usersAPI.follow, action.userId);
-  if (response.data.resultCode === 0) {
+  try {
+    yield call(usersAPI.follow, action.userId);
     yield put(actions.followSuccess(action.userId));
+  } catch {
+    yield put(
+      errorActions.getSnackbarPopup(
+        "Не удалось совершить действие. Попробуйте позже."
+      )
+    );
   }
 }
 
@@ -52,8 +65,14 @@ interface IUnfollowRequest {
 }
 
 export function* unfollowRequest(action: IUnfollowRequest) {
-  let response = yield call(usersAPI.unfollow, action.userId);
-  if (response.data.resultCode === 0) {
+  try {
+    yield call(usersAPI.unfollow, action.userId);
     yield put(actions.unfollowSuccess(action.userId));
+  } catch {
+    yield put(
+      errorActions.getSnackbarPopup(
+        "Не удалось совершить действие. Попробуйте позже."
+      )
+    );
   }
 }

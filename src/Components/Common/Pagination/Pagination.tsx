@@ -7,6 +7,7 @@ import {
   getTotalUsersCount,
 } from "../../../Redux/selectors";
 import getClassName from "../../../Services/Service";
+import arrow from "../../../Assets/Images/arrow.svg";
 import styles from "./pagination.module.scss";
 
 type PropsType = {
@@ -31,14 +32,20 @@ const Pagination: React.FC<PropsType> = (props) => {
   let rightPortionPageNumber = portionNumber * portionSize;
 
   return (
-    <div>
+    <div
+      className={getClassName(
+        "flex _align-items-center",
+        styles["bottom-space"]
+      )}
+    >
       {portionNumber > 1 && (
         <button
+          className={styles["previous-botton"]}
           onClick={() => {
             setPortionNumber(portionNumber - 1);
           }}
         >
-          Previous
+          <img src={arrow} className={styles["image"]} alt="" />
         </button>
       )}
       {pages
@@ -50,6 +57,7 @@ const Pagination: React.FC<PropsType> = (props) => {
             <span
               onClick={() => props.onPageChanged(x)}
               className={getClassName(
+                styles["page-number"],
                 currentPage === x && styles["selected-page"]
               )}
             >
@@ -59,11 +67,12 @@ const Pagination: React.FC<PropsType> = (props) => {
         })}
       {portionCount > portionNumber && (
         <button
+          className={styles["next-botton"]}
           onClick={() => {
             setPortionNumber(portionNumber + 1);
           }}
         >
-          Next
+          <img src={arrow} className={styles["image"]} alt="" />
         </button>
       )}
     </div>

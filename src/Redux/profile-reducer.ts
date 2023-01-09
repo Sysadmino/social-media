@@ -18,7 +18,6 @@ let initialState: initialStateType = {
   profileStatus: "",
 };
 
-export const ADD_POST = "ADD_POST";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_USER_PROFILE_STATUS = "SET_USER_PROFILE_STATUS";
 export const UPDATE_PHOTO_SUCCESS = "UPDATE_PHOTO_SUCCESS";
@@ -33,19 +32,6 @@ const profileReducer = (
   action: ActionsTypes
 ): initialStateType => {
   switch (action.type) {
-    case ADD_POST: {
-      return {
-        ...state,
-        posts: [
-          ...state.posts,
-          {
-            id: 5,
-            message: action.newPostText,
-            likesCount: 0,
-          },
-        ],
-      };
-    }
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
@@ -91,11 +77,6 @@ export const actions = {
     ({
       type: SAVE_PROFILE,
       profile,
-    } as const),
-  addPost: (newPostText: string) =>
-    ({
-      type: ADD_POST,
-      newPostText,
     } as const),
   setUserProfile: (profile: ProfileType) =>
     ({

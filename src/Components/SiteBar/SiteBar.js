@@ -6,7 +6,7 @@ const SiteBar = () => {
   return (
     <nav className={styles.sitebar}>
       <ul>
-        <li>
+        <li activeClassName={styles["active-item"]}>
           <NavLink
             className={styles.item}
             activeClassName={styles.active}
@@ -15,16 +15,7 @@ const SiteBar = () => {
             Profile
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            className={styles.item}
-            activeClassName={styles.active}
-            to="/dialogs"
-          >
-            Messages
-          </NavLink>
-        </li>
-        <li>
+        <li activeClassName={styles["active-item"]}>
           <NavLink
             className={styles.item}
             activeClassName={styles.active}
@@ -33,17 +24,17 @@ const SiteBar = () => {
             Users
           </NavLink>
         </li>
-        <li>
+        <li activeClassName={styles["active-item"]}>
           <a className={styles.item} href="http://localhost:3000/">
             News
           </a>
         </li>
-        <li>
+        <li activeClassName={styles["active-item"]}>
           <a className={styles.item} href="http://localhost:3000/">
             Music
           </a>
         </li>
-        <li>
+        <li activeClassName={styles["active-item"]}>
           <a className={styles.item} href="http://localhost:3000/">
             Settings
           </a>

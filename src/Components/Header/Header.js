@@ -6,19 +6,22 @@ const Header = (props) => {
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
-        <img
-          src="https://sun9-52.userapi.com/c855428/v855428083/223253/khtG4bBh1yA.jpg"
-          alt="logo"
-          className={styles.image}
-        />
+        <div className={styles["header__title"]}>Social Media App</div>
         <div className={styles["login-block"]}>
           {props.isAuth ? (
-            <>
-              <div style={{ color: "black" }}>{props.login}</div>
-              <button onClick={props.logout}>Log out</button>
-            </>
+            <div className="flex _direction-column _align-items-center gap-5">
+              <div>{props.login}</div>
+              <button
+                className={styles["header__logout-button"]}
+                onClick={props.logout}
+              >
+                Logout
+              </button>
+            </div>
           ) : (
-            <NavLink to={"/login"}>Login</NavLink>
+            <NavLink to={"/login"}>
+              <div className={styles["header__login-button"]}>Login</div>
+            </NavLink>
           )}
         </div>
       </div>

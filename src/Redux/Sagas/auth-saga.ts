@@ -23,7 +23,6 @@ export function* getAuthUserData() {
 
   if (response.data.resultCode === ResultCodesEnum.Success) {
     const { id, login, email } = yield response.data.data;
-    console.log("Данные получил чувак. Сейчас буду сетать их в редюсер");
     yield put(actions.setAuthUserData(id, login, email, true));
   }
 }

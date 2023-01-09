@@ -6,6 +6,12 @@
 .ava-img {
   width: 100px;
   height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .info {
   width: 100%;
@@ -17,4 +23,18 @@
 .info-block {
   display: flex;
   flex-direction: column;
+}
+.edit-button {
+  width: 200px;
+  height: 27px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #0077ff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

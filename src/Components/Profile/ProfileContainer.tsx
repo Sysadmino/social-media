@@ -8,7 +8,6 @@ import withAuthRedirect from "../../hoc/withAuthRedirect";
 import { AppStateType } from "../../Redux/redux-store";
 import { ProfileType } from "../../types/types";
 import { actions } from "../../Redux/profile-reducer";
-// import styles from "./profile.module.scss";
 
 interface IProfileContainerProps {
   profile: ProfileType;
@@ -38,10 +37,8 @@ const ProfileContainer: React.FC<
     let id: number | null = +userId;
     if (!id) {
       id = authorizedUserId;
-      console.log(id);
       if (!id) {
         history.push("/login");
-        console.log('history.push("/login")');
       }
     }
     if (!id) {
@@ -51,7 +48,6 @@ const ProfileContainer: React.FC<
     } else {
       getUserProfile(id);
       getUserProfileStatus(id);
-      console.log(id);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,6 +72,5 @@ export default compose<React.ComponentType>(
     updateUserProfilePhoto: actions.updatePhotoRequest,
     saveProfile: actions.saveProfile,
   }),
-  // withRouter,
   withAuthRedirect
 )(ProfileContainer);

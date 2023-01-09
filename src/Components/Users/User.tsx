@@ -51,10 +51,6 @@ const User: React.FC<IUserProps> = (props) => {
           <div>{user.name}</div>
           <div>{user.status}</div>
         </span>
-        <span>
-          <div>{"x.location.country"}</div>
-          <div>{"x.location.city"}</div>
-        </span>
       </span>
     </div>
   );

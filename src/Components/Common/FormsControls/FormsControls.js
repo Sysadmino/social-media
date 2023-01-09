@@ -1,33 +1,15 @@
 import React from "react";
 import styles from "./forms-control.module.scss";
+import getClassName from "../../../Services/Service";
 
-// interface IFormControlProps {
-//   error?: boolean;
-//   helperText?: string;
-//   children: React.ReactNode;
-// }
-
-// : React.FunctionComponent<IFormControlProps>
-
-const FormControl = ({ error, helperText, children }) => {
+const FormControl = ({ error, helperText, formControlClassName, children }) => {
   return (
-    <div className={styles["form-control"]}>
+    <div className={getClassName(styles["form-control"], formControlClassName)}>
       <div className={error && styles.error}>{children}</div>
       {error && <span className={styles["error-text"]}>{helperText}</span>}
     </div>
   );
 };
-
-// interface ITextareaProps {
-//   type: string;
-//   name: any;
-//   placeholder?: string;
-//   id?: string;
-//   helperText?: string;
-//   error?: boolean;
-// }
-
-//: React.FC<ITextareaProps>
 
 export const Textarea = (props) => {
   return (
@@ -41,22 +23,16 @@ export const Textarea = (props) => {
   );
 };
 
-// interface IInputProps {
-//   type: string;
-//   name: any;
-//   placeholder?: string;
-//   id?: string;
-//   helperText?: string;
-//   error?: boolean;
-// }
-
-// : React.FC<IInputProps>
-
 export const Input = (props) => {
-  const { type, name, placeholder } = props;
+  const { type, name, placeholder, className } = props;
   return (
     <FormControl {...props}>
-      <input type={type} {...name} placeholder={placeholder} />
+      <input
+        type={type}
+        {...name}
+        placeholder={placeholder}
+        className={className}
+      />
     </FormControl>
   );
 };

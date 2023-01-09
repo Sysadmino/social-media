@@ -8,6 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AppStateType } from "../../Redux/redux-store";
 import { actions } from "../../Redux/auth-reducer";
+import stylesLogin from "./login.module.scss";
+import getClassName from "../../Services/Service";
 
 const schema = yup.object().shape({
   email: yup
@@ -48,11 +50,27 @@ const Login: FC<Props> = (props) => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+    <div
+      className={getClassName(
+        "flex _direction-column _align-items-center",
+        stylesLogin["login-wrapper"]
+      )}
+    >
+      {props.errorMessage && (
+        <div className={styles["form-common-error"]}>
+          Неверный Email или Пароль
+        </div>
+      )}
+      <h1 className={stylesLogin.title}>Login</h1>
+      <form
+        className={stylesLogin["login-form"]}
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div>
           <Input
+            className={stylesLogin.field}
+            formControlClassName={stylesLogin["form-control-field"]}
             type="email"
             placeholder="Login"
             name={{ ...register("email") }}
@@ -62,6 +80,8 @@ const Login: FC<Props> = (props) => {
         </div>
         <div>
           <Input
+            className={stylesLogin.field}
+            formControlClassName={stylesLogin["form-control-field"]}
             type="password"
             placeholder="Password"
             name={{ ...register("password") }}
@@ -69,9 +89,13 @@ const Login: FC<Props> = (props) => {
             helperText={errors?.password?.message}
           />
         </div>
-        <div>
-          <Input type="checkbox" name={{ ...register("rememberMe") }} />
-          <span>Запомнить меня</span>
+        <div className={stylesLogin["remember-block"]}>
+          <Input
+            className={stylesLogin["remember-checkbox"]}
+            type="checkbox"
+            name={{ ...register("rememberMe") }}
+          />
+          <span className={stylesLogin["remember-text"]}>Запомнить меня</span>
         </div>
         {props.captchaUrl && (
           <>
@@ -85,15 +109,17 @@ const Login: FC<Props> = (props) => {
             </div>
           </>
         )}
-        <button type="submit" disabled={!isValid}>
+        <button
+          className={getClassName(
+            stylesLogin["login-button"],
+            !isValid && styles["_disable"]
+          )}
+          type="submit"
+          disabled={!isValid}
+        >
           Login
         </button>
       </form>
-      {props.errorMessage && (
-        <div className={styles["form-common-error"]}>
-          Неверный Email или Пароль
-        </div>
-      )}
     </div>
   );
 };

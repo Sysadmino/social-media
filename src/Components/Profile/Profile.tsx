@@ -1,8 +1,6 @@
 import React from "react";
 import { ProfileType } from "../../types/types";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-// import styles from "./profile.module.scss";
 
 interface IProfileProps {
   isOwner: boolean;
@@ -24,7 +22,6 @@ const Profile: React.FC<IProfileProps> = (props) => {
         updateUserProfilePhoto={props.updateUserProfilePhoto}
         updateUserProfileStatus={props.updateUserProfileStatus}
       />
-      <MyPostsContainer />
     </div>
   );
 };

@@ -19,8 +19,8 @@ const initialState: InitialStateType = {
   pageSize: 5,
   totalItemsCount: 0,
   currentPage: 1,
-  portionSize: 15,
-  isFetching: true,
+  portionSize: 5,
+  isFetching: false,
   filter: {
     term: "",
     friend: null,

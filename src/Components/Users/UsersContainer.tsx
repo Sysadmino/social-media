@@ -1,10 +1,8 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Users from "./Users";
-import Preloader from "../Common/Preloader/Preloader";
 import {
   getCurrentPage,
-  getIsFetching,
   getPageSize,
   getUsersFilterFriend,
   getUsersFilterTerm,
@@ -15,7 +13,6 @@ import { actions } from "../../Redux/users-reducer";
 const UsersContainer: FunctionComponent = () => {
   const currentPage = useSelector(getCurrentPage);
   const pageSize = useSelector(getPageSize);
-  const isFetching = useSelector(getIsFetching);
   const term = useSelector(getUsersFilterTerm);
   const friend = useSelector(getUsersFilterFriend);
 
@@ -76,7 +73,6 @@ const UsersContainer: FunctionComponent = () => {
 
   return (
     <>
-      {isFetching ? <Preloader /> : null}
       <Users onPageChanged={onPageChanged} onFilterChanged={onFilterChanged} />
     </>
   );

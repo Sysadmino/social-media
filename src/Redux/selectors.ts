@@ -29,14 +29,6 @@ export const getPortionSize = (state: AppStateType) => {
   return state.usersPage.portionSize;
 };
 
-export const getDialogs = (state: AppStateType) => {
-  return state.dialogsPage.dialogs;
-};
-
-export const getMessages = (state: AppStateType) => {
-  return state.dialogsPage.messages;
-};
-
 export const getUsersFilterTerm = (state: AppStateType) => {
   return state.usersPage.filter.term;
 };
@@ -47,4 +39,12 @@ export const getUsersFilterFriend = (state: AppStateType) => {
 
 export const getInitialized = (state: AppStateType) => {
   return state.app.initialized;
+};
+
+export const getVisible = (state: AppStateType) => {
+  return state.error.visible;
+};
+
+export const getMessage = (state: AppStateType) => {
+  return state.error.object;
 };

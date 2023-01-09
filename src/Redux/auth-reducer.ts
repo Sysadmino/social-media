@@ -26,9 +26,6 @@ const authReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case SET_USER_DATA: {
-      console.log(
-        "Теперь данные точно обновились в редюсере. Принимай их App!"
-      );
       return {
         ...state,
         ...action.data,

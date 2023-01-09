@@ -1,5 +1,160 @@
 .content {
   width: 100%;
   margin-left: 10px;
-  background-color: lightgreen;
+}
+.snackbar-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.snackbar-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.snackbar-exit {
+  opacity: 1;
+}
+.snackbar-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+.snackbar-body-wrapper {
+  width: 100%;
+  min-height: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 10px;
+  z-index: 2001;
+}
+
+.snackbar-body {
+  opacity: 0.8;
+  background-color: #000000;
+  min-width: 0;
+  max-width: 400px;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: white;
+  line-height: 1.14;
+  padding: 24px 39px 27px 40px;
+  border-radius: 27px;
+  &._success {
+    font-size: 17px;
+  }
+}
+.snackbar-type-title {
+  font-weight: bold;
+  line-height: 1.41;
+  text-align: center;
+  color: white;
+  margin-bottom: 9px;
+}
+.snackbar-type-title {
+  color: white;
+}
+.snackbar-close-button {
+  margin-left: 20px;
+  font-size: 25px;
+  padding: 0;
+}
+.snackbar-button {
+  opacity: 0.8;
+  background-color: #000000;
+}
+
+/*
+*   Оригинальная анимация прелоадера
+*   Источник - https://loading.io/css/
+*/
+.lds-spinner {
+  color: gray;
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  &._lds-small-spinner {
+    width: 15px;
+    height: 15px;
+    .lds-inner-spinner {
+      animation: 1s linear 0s normal none infinite running rot !important;
+      -webkit-animation: 1s linear 0s normal none infinite running rot !important;
+      svg {
+        display: block;
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+  .lds-inner-spinner {
+    animation: 1s linear 0s normal none infinite running rot !important;
+    -webkit-animation: 1s linear 0s normal none infinite running rot !important;
+    svg {
+      display: block;
+      width: 60px;
+      height: 60px;
+    }
+  }
+  @keyframes rot {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes rot {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.full-screen-preloader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+
+  .lds-spinner {
+    margin: auto;
+  }
+  &._900 {
+    z-index: 900;
+  }
+}
+
+.in-block-preloader {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+
+  .lds-spinner {
+    margin: auto;
+  }
+}
+.absolute-preloader {
+  position: absolute;
+  padding: 0;
+  height: 100%;
+}
+
+.transparent-preloader {
+  background-color: rgba(0, 0, 0, 0);
 }

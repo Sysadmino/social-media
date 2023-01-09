@@ -1,7 +1,7 @@
 import { ProfileType } from "./../../types/types";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { profileAPI, ResultCodesEnum } from "../../api/api";
-// import { ProfileType } from "../../types/types";
+import { errorActions } from "../../Utils/EnqueueSnackbar";
 import {
   actions,
   GET_USER_PROFILE,
@@ -25,8 +25,14 @@ interface IGetUserProfile {
 }
 
 export function* getUserProfile(action: IGetUserProfile) {
-  let response = yield call(profileAPI.getProfile, action.userId);
-  yield put(actions.setUserProfile(response.data));
+  try {
+    let response = yield call(profileAPI.getProfile, action.userId);
+    yield put(actions.setUserProfile(response.data));
+  } catch {
+    yield put(
+      errorActions.getSnackbarPopup("Не удалось получить профиль пользователя")
+    );
+  }
 }
 
 interface IGetUserProfileStatus {
@@ -34,8 +40,14 @@ interface IGetUserProfileStatus {
 }
 
 export function* getUserProfileStatus(action: IGetUserProfileStatus) {
-  let response = yield call(profileAPI.getStatus, action.userId);
-  yield put(actions.setUserProfileStatus(response.data));
+  try {
+    let response = yield call(profileAPI.getStatus, action.userId);
+    yield put(actions.setUserProfileStatus(response.data));
+  } catch {
+    yield put(
+      errorActions.getSnackbarPopup("Не удалось получить статус пользователя")
+    );
+  }
 }
 
 interface IUpdateUserProfileStatus {
@@ -46,6 +58,10 @@ export function* updateUserProfileStatus(action: IUpdateUserProfileStatus) {
   let response = yield call(profileAPI.updateStatus, action.newStatus);
   if (response.data.resultCode === ResultCodesEnum.Success) {
     yield put(actions.setUserProfileStatus(action.newStatus));
+  } else {
+    yield put(
+      errorActions.getSnackbarPopup("Не удалось обновить статус профиля")
+    );
   }
 }
 
@@ -57,6 +73,10 @@ export function* updateUserProfilePhoto(action: IUpdateUserProfilePhoto) {
   let response = yield call(profileAPI.updatePhoto, action.file);
   if (response.data.resultCode === ResultCodesEnum.Success) {
     yield put(actions.updatePhotoSuccess(response.data.data.photos));
+  } else {
+    yield put(
+      errorActions.getSnackbarPopup("Не удалось обновить фото профиля")
+    );
   }
 }
 
@@ -72,7 +92,9 @@ export function* saveProfile(action: ISaveProfile) {
       const userIdAction: IGetUserProfile = { userId };
       yield call(getUserProfile, userIdAction);
     } else {
-      throw new Error("userId can't be null");
+      yield put(errorActions.getSnackbarPopup("userId can't be null"));
     }
+  } else {
+    yield put(errorActions.getSnackbarPopup("Не удалось сохранить профиль"));
   }
 }

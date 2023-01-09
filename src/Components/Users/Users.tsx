@@ -9,9 +9,13 @@ import {
   getUsers,
   getUsersFilterFriend,
   getUsersFilterTerm,
+  getIsFetching,
 } from "../../Redux/selectors";
-import { followRequest, unfollowRequest } from "../../Redux/Sagas/users-saga";
+// import { followRequest, unfollowRequest } from "../../Redux/Sagas/users-saga";
 import { actions } from "../../Redux/users-reducer";
+
+import styles from "./users.module.scss";
+import Preloader from "../Common/Preloader/Preloader";
 
 type PropsType = {
   onPageChanged: (pageNumber: number) => void;
@@ -22,6 +26,7 @@ const Users: React.FC<PropsType> = (props) => {
   const { onPageChanged } = props;
 
   const users = useSelector(getUsers);
+  const isFetching = useSelector(getIsFetching);
 
   const dispatch = useDispatch();
 
@@ -38,15 +43,18 @@ const Users: React.FC<PropsType> = (props) => {
   return (
     <div>
       <UsersSearchForm {...props} />
+      {isFetching ? <Preloader inBlock transparent /> : null}
       <Pagination onPageChanged={onPageChanged} />
-      {users.map((x) => (
-        <User
-          key={x.id}
-          follow={followCallback}
-          unfollow={unfollowCallback}
-          user={x}
-        />
-      ))}
+      <div className={styles["users-container"]}>
+        {users.map((x) => (
+          <User
+            key={x.id}
+            follow={followCallback}
+            unfollow={unfollowCallback}
+            user={x}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -94,6 +102,7 @@ const UsersSearchForm: React.FC<PropsType> = (props) => {
         type="text"
         placeholder="Search user"
         name={{ ...register("term") }}
+        className={styles["search-user"]}
       />
       <Controller
         control={control}
@@ -107,7 +116,7 @@ const UsersSearchForm: React.FC<PropsType> = (props) => {
           />
         )}
       />
-      <button>Отправить</button>
+      <button className={styles["search-button"]}>Search</button>
     </form>
   );
 };

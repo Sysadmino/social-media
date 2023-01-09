@@ -27,7 +27,7 @@ const ProfileInfo: React.FC<IProfileInfoProps> = (props) => {
   const [editMode, setEditMode] = useState(false);
 
   if (!profile) {
-    return <Preloader />;
+    return <Preloader inBlock transparent />;
   }
 
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +85,11 @@ const ProfileData: React.FC<IProfileDataProps> = (props) => {
   const { isOwner, profile } = props;
   return (
     <>
-      {isOwner && <button onClick={props.goToEditMode}>Edit</button>}
+      {isOwner && (
+        <button className={styles["edit-button"]} onClick={props.goToEditMode}>
+          Edit profile
+        </button>
+      )}
       <div>
         <b>Full name:</b> {profile?.fullName}
       </div>

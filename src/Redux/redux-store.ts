@@ -1,6 +1,5 @@
 import { applyMiddleware, combineReducers, createStore, compose } from "redux";
 import authReducer from "./auth-reducer";
-import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";
@@ -9,14 +8,15 @@ import usersReducer from "./users-reducer";
 import createSagaMiddleware from "redux-saga";
 import appReducer from "./app-reducer";
 import { rootWatcher } from "./Sagas";
+import enqueueSnackbarReducer from "../Utils/EnqueueSnackbar";
 
 let rootReducer = combineReducers({
   profilePage: profileReducer,
-  dialogsPage: dialogsReducer,
   sidebar: sidebarReducer,
   usersPage: usersReducer,
   auth: authReducer,
   app: appReducer,
+  error: enqueueSnackbarReducer,
 });
 
 type rootReducerType = typeof rootReducer;

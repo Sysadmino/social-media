@@ -8,8 +8,6 @@ export function* appWatcher() {
 
 export function* initializeApp() {
   const promise = yield call(getAuthUserData);
-  console.log("Ок, auth, я их вроде как принял", promise);
   yield all([promise]);
   yield put(actions.initializedSuccess());
-  console.log("Проинициализировал true");
 }
