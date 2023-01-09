@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import Layout from "./Layout/Layout";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Redux/redux-store";
 import Preloader from "./Components/Common/Preloader/Preloader";
@@ -12,7 +12,7 @@ const ProfileContainer = React.lazy(() =>
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <Layout>
           <Suspense fallback={<Preloader inBlock transparent />}>
@@ -29,7 +29,7 @@ const App = () => {
           </Suspense>
         </Layout>
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
