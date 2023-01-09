@@ -25,17 +25,17 @@ const SiteBar = () => {
           </NavLink>
         </li>
         <li activeClassName={styles["active-item"]}>
-          <a className={styles.item} href="http://localhost:3000/">
+          <a className={styles.item} href="#">
             News
           </a>
         </li>
         <li activeClassName={styles["active-item"]}>
-          <a className={styles.item} href="http://localhost:3000/">
+          <a className={styles.item} href="#">
             Music
           </a>
         </li>
         <li activeClassName={styles["active-item"]}>
-          <a className={styles.item} href="http://localhost:3000/">
+          <a className={styles.item} href="#">
             Settings
           </a>
         </li>
