@@ -6,6 +6,7 @@ import store from "./Redux/redux-store";
 import Preloader from "./Components/Common/Preloader/Preloader";
 import UsersContainer from "./Components/Users/UsersContainer";
 import Login from "./Components/Login/Login";
+const ChatPage = React.lazy(() => import("./Pages/ChatPage/ChatPage"));
 const ProfileContainer = React.lazy(() =>
   import("./Components/Profile/ProfileContainer")
 );
@@ -24,6 +25,7 @@ const App = () => {
               />
               <Route path="/users" render={() => <UsersContainer />} />
               <Route path="/login" render={() => <Login />} />
+              <Route path="/chat" render={() => <ChatPage />} />
               <Route render={() => <div>404 NOT FOUND</div>} />
             </Switch>
           </Suspense>

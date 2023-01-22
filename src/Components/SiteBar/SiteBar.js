@@ -25,6 +25,15 @@ const SiteBar = () => {
           </NavLink>
         </li>
         <li activeClassName={styles["active-item"]}>
+          <NavLink
+            className={styles.item}
+            activeClassName={styles.active}
+            to="/chat"
+          >
+            Chat
+          </NavLink>
+        </li>
+        <li activeClassName={styles["active-item"]}>
           <NavLink className={styles.item} to="/">
             News
           </NavLink>
