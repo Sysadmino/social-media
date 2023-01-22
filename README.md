@@ -1,4 +1,4 @@
-# Social Media App
+# Social Media App (https://sysadmino.github.io/social-media/)
 
 Social Media App is a big project with many different options. it has complete authorization, pagination, search and filter users, possibility to edit user data, follow/unfollow.
 
