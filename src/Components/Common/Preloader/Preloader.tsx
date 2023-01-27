@@ -10,12 +10,12 @@ import oval from "../../../Assets/Images/oval.svg";
  *
  * */
 const Preloader: React.FunctionComponent<{
-  inBlock?: boolean | "absolute",
-  transparent?: boolean,
-  disableSpinner?: boolean,
-  inButton?: boolean,
-  spinnerIconClassName?: string,
-  style?: React.CSSProperties,
+  inBlock?: boolean | "absolute";
+  transparent?: boolean;
+  disableSpinner?: boolean;
+  inButton?: boolean;
+  spinnerIconClassName?: string;
+  style?: React.CSSProperties;
 }> = (props) => (
   <div
     className={getClassName(

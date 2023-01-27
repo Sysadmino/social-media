@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Preloader from "../../Components/Common/Preloader/Preloader";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import styles from "./chat-page.module.scss";
 
@@ -15,12 +16,28 @@ const ChatPage: React.FC = () => {
 
 const Chat: React.FC = () => {
   const [ws, setWs] = useState<WebSocket | null>(null);
+
+  const [readyStatus, setReadyStatus] = useState<"pending" | "ready">(
+    "pending"
+  );
+
+  useEffect(() => {
+    ws?.addEventListener("open", () => {
+      setReadyStatus("ready");
+    });
+    return () => {
+      ws?.removeEventListener("open", () => {
+        setReadyStatus("ready");
+      });
+    };
+  }, [readyStatus, ws]);
+
   useEffect(() => {
     let webChannel: WebSocket;
     const closeHandler = () => {
       setTimeout(() => {
         createChannel();
-      }, 3000);
+      }, 5000);
     };
 
     function createChannel() {
@@ -40,16 +57,25 @@ const Chat: React.FC = () => {
     };
   }, []);
 
+  if (readyStatus === "pending") {
+    return <Preloader inBlock transparent />;
+  }
+
   return (
     <div>
       <Messages ws={ws} />
-      <AddMessageForm ws={ws} />
+      <AddMessageForm ws={ws} readyStatus={readyStatus} />
     </div>
   );
 };
 
 const Messages: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
   const [messages, setMessages] = useState<Array<ChatMessage>>([]);
+  const messagesAnchorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesAnchorRef.current?.scrollIntoView(false);
+  }, [messages]);
 
   useEffect(() => {
     ws?.addEventListener("message", (e) => {
@@ -63,9 +89,12 @@ const Messages: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
   }, [ws]);
 
   return (
-    <div>
+    <div className={styles["user-container"]}>
       {messages.map((x) => (
-        <Message key={x.userId} message={x} />
+        <>
+          <Message key={x.userId} message={x} />
+          <div ref={messagesAnchorRef}></div>
+        </>
       ))}
     </div>
   );
@@ -78,7 +107,7 @@ interface IChatMessageProps {
 const Message: React.FC<IChatMessageProps> = (props) => {
   const { message } = props;
   return (
-    <div className={styles["user-block"]}>
+    <div className={styles["user"]}>
       <img alt="" src={message.photo} className={styles["user__avatar"]} />
       <div className={styles["user__message-block"]}>
         <div className={styles["user__author"]}>{message.userName}</div>
@@ -88,22 +117,11 @@ const Message: React.FC<IChatMessageProps> = (props) => {
   );
 };
 
-const AddMessageForm: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
+const AddMessageForm: React.FC<{
+  ws: WebSocket | null;
+  readyStatus: "pending" | "ready";
+}> = ({ ws, readyStatus }) => {
   const [message, setMessage] = useState("");
-  const [readyStatus, setReadyStatus] = useState<"pending" | "ready">(
-    "pending"
-  );
-
-  useEffect(() => {
-    ws?.addEventListener("open", () => {
-      setReadyStatus("ready");
-    });
-    return () => {
-      ws?.removeEventListener("open", () => {
-        setReadyStatus("ready");
-      });
-    };
-  }, [readyStatus, ws]);
 
   const sendMessageHandler = () => {
     if (!message) {
