@@ -83,6 +83,9 @@ interface IProfileDataProps {
 
 const ProfileData: React.FC<IProfileDataProps> = (props) => {
   const { isOwner, profile } = props;
+  const contactsList = Object.keys(profile.contacts).filter(
+    (x) => profile.contacts[x as keyof ContactType] !== ""
+  );
   return (
     <>
       {isOwner && (
@@ -90,34 +93,41 @@ const ProfileData: React.FC<IProfileDataProps> = (props) => {
           Edit profile
         </button>
       )}
-      <div>
-        <b>Full name:</b> {profile?.fullName}
-      </div>
-      <div>
-        <b>About me:</b> {profile?.aboutMe}
-      </div>
-      <div>
-        <b>Looking for a job:</b> {profile?.lookingForAJob ? "Yes" : "No"}
-      </div>
+      {profile?.fullName && (
+        <div>
+          <b>Full name:</b> {profile?.fullName}
+        </div>
+      )}
+      {profile?.aboutMe && (
+        <div>
+          <b>About me:</b> {profile?.aboutMe}
+        </div>
+      )}
       {profile?.lookingForAJob && (
+        <div>
+          <b>Looking for a job:</b> {profile?.lookingForAJob ? "Yes" : "No"}
+        </div>
+      )}
+      {profile?.lookingForAJobDescription && (
         <div>
           <b>My professional skills:</b> {profile?.lookingForAJobDescription}
         </div>
       )}
-      <div>
-        <b>Contacts</b>
-        {profile?.contacts
-          ? Object.keys(profile.contacts).map((x) => {
-              return (
+      {profile?.contacts && contactsList.length !== 0 && (
+        <div>
+          <b>Contacts</b>
+          {Object.keys(profile.contacts).map(
+            (x) =>
+              profile.contacts[x as keyof ContactType] !== "" && (
                 <Contact
                   key={x}
                   contactTitle={x}
                   contactValue={profile.contacts[x as keyof ContactType]}
                 />
-              );
-            })
-          : null}
-      </div>
+              )
+          )}
+        </div>
+      )}
     </>
   );
 };

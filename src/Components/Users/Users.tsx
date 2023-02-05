@@ -40,10 +40,13 @@ const Users: React.FC<PropsType> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (isFetching) {
+    return <Preloader inBlock transparent />;
+  }
+
   return (
     <div>
       <UsersSearchForm {...props} />
-      {isFetching ? <Preloader inBlock transparent /> : null}
       <Pagination onPageChanged={onPageChanged} />
       <div className={styles["users-container"]}>
         {users.map((x) => (
@@ -79,15 +82,10 @@ const UsersSearchForm: React.FC<PropsType> = (props) => {
   const term = useSelector(getUsersFilterTerm);
   const friend = useSelector(getUsersFilterFriend);
 
-  const { register, handleSubmit, control, setValue } = useForm<FormValues>({
+  const { register, handleSubmit, control } = useForm<FormValues>({
     mode: "onChange",
     defaultValues: { term, friend },
   });
-
-  React.useEffect(() => {
-    setValue("term", term);
-    setValue("friend", friend);
-  }, [term, friend, setValue]);
 
   const onSubmit: SubmitHandler<FormValues> = (value) => {
     props.onFilterChanged(value.term, value.friend);

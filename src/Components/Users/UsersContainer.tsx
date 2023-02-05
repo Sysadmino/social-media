@@ -78,4 +78,4 @@ const UsersContainer: FunctionComponent = () => {
   );
 };
 
-export default UsersContainer;
+export default React.memo(UsersContainer);
